@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Demo React</title>
+        <meta name="description" content="">
+
+        <style>
+         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+         body, #app { background: #FAFAFA; width: 100%; display: flex; font-family: 'Inter'; justify-content: center; }
+
+         .shopping { display: flex; flex-direction: column; background: #FFFFFF; border: 1px solid #DDD; border-radius: 10px; overflow: hidden; box-shadow: 0 0 5px #0002; }
+         .shopping-title { padding: 10px; margin: 0; border-bottom: 1px solid #DDD; }
+         .shopping-list { display: flex; flex-direction: column; margin: 0; padding: 0; }
+         .shopping-product { list-style-type: none; margin: 0; padding: 10px; }
+         .shopping-product:nth-child(odd) { background: #FFFFFF }
+         .shopping-product:nth-child(even) { background: #FAFAFA }
+
+         .product { display: flex; justify-content: space-between; }
+
+        </style>
+    </head>
+    <body>
+
+        <div id="app"></div>
+
+        <script>
+        function createElement(type, attributes, children) {
+             const element = document.createElement(type)
+
+             for(let key in attributes) {
+                 element.setAttribute(key, attributes[key])
+             }
+
+             for(let child of children) {
+                 element.append(child)
+             }
+
+             return element
+         }
+
+         function Product(name, quantity) {
+             return createElement('div', { class: 'product' }, [
+                 createElement('span', { class: 'product-name' }, [name]),
+                 createElement('span', { class: 'product-quantity' }, [quantity]),
+             ])
+         }
+
+         function Shopping(title, products) {
+             return createElement('div', { class: 'shopping' }, [
+                 createElement('h1', { class: 'shopping-title' }, [title]),
+                 createElement('ul', { class: 'shopping-list' }, products.map(
+                     (product) => createElement('li', { class: 'shopping-product' }, [
+                         Product( product.name, product.quantity )
+                    ]))
+                 )
+             ])
+
+         }
+
+         const element = Shopping('🛒 Ma liste de courses', [
+             { name: 'oeufs', quantity: 6 },
+             { name: 'mayonnaise', quantity: 1 },
+             { name: 'liquide vaisselle', quantity: 1 },
+             { name: 'tagliatelles', quantity: 1 },
+         ])
+
+         document.getElementById('app').appendChild(element)
+
+        </script>
+    </body>
+</html>
