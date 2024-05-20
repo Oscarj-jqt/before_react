@@ -66,8 +66,11 @@
              { name: 'tagliatelles', quantity: 1 },
          ])
 
-         document.getElementById('app').appendChild(element)
+        //  document.getElementById('app').appendChild(element)
 
+        const root = CreactDOM.createRoot(document.getElementById('app'),element)
+
+        root.render(element)
         </script>
     </body>
 </html>
